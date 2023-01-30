@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="cache-control" content="no-store" >
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" >
+
+<style type="text/css">
+h1 {
+  color: blue;
+}
+</style>
+
+<TITLE>OpenSSL Compatibility</TITLE>
+</head>
+
+<body  bgcolor="white" text="Black" link="Blue" vlink="Blue" alink="Blue" style="font: 14pt Helvetica;">
+<center>
+<a name="top"></a>
+<img alt="DeadboltEdit Logo" src="Images/DBE_Logo_Large.png">
+<h1>OpenSSL Compatibility</h1>
+</center>
+<br>
+<br>
+<br>
+
+<OL>
+   <li><a href="#encryption">About the Encryption</a></li>
+   <li><a href="#compatibility">How is the encryption compatible with OpenSSL?</a></li>
+   <li><a href="#decrypt">How to Decrypt a DeadboltEdit File with OpenSSL</a></li>
+   <li><a href="#script">Simplified Decryption With A UNIX Script</a></li>
+</OL>
+
+<br>
+<OL>
+
+<li><a name="encryption"></a><h4>About the Encryption</h4>
+<p>The encryption used in DeadbolotEdit is an implementation of the  Blowfish Cipher. Blowfish is a strong
+ encryption method that is widely accepted and used in commercial encryption products. A good explanation of
+ the Blowfish cipher can be found
+ here: <a href="http://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Wikipedia: Blowfish Cipher</a>.
+</p>
+
+<p>The Blowfish encryption in DeadboltEdit is compatible with the OpenSSL implemention. Key length is 128-bits,
+ and the encryption mode is Cipher-Block-Chaining (CBC).</p>
+
+<p>Compatibility with OpenSSL is an important consideration, because the encryption is verifiable against a
+ well known and respected implementation.</p>
+<a href="#top">Top</a>
+</li>
+
+
+<li><a name="compatibility"></a><h4>How is the encryption compatible with OpenSSL?</h4>
+<p>When DeadboltEdit encrypts text, the actual encryption and encoding are compatible with OpenSSL encryption.
+However, when DeadboltEdit stores encrypted files, the file format differs from the OpenSSL file format.  This
+ is because DeadboltEdit stores additional information embedded in a file header, which allows checking for
+ file corruption and tampering. For this reason, DeadboltEdit files cannot be used with OpenSSL.
+</p>
+
+<p>As an excercise to verify the encryption implementation in DeadboltEdit, it is possible to remove file
+ header information from a DeadboltEdit encrypted file, and then decrypt it with OpenSSL command-line tools
+ using the DeadboltEdit password that was used to create the file.  This is not something you would want to
+ do in actual practice, but it is a valuable excercise to demonstrate the correctness of the encryption
+ implementation.
+</p>
+<p>Note: Decrypting with OpenSSL can only be done with knowledge of the password that was used to create the
+ file. This is not a security weakness.</p>
+<a href="#top">Top</a>
+</li>
+
+
+<li><a name="decrypt"></a><h4>How to Decrypt a DeadboltEdit File with OpenSSL</h4>
+<p>This process can be used to verify the encryption implementation in DeadboltEdit.  It is intended only for
+ testing and verification.
+</p>
+
+Requirements:<br>
+<OL type="a">
+   <li>OpenSSL command-line tools.</li>
+   <li>A DeadboltEdit test file.  <b>Do NOT use an important file - make a test file that can be discarded if
+       you make a mistake.</b></li>
+   <li>A text editor (don't use a word processor).</li>
+</OL>
+
+
+<p>Steps:</p>
+<OL type="a">
+<li>Edit the DeadboltEdit test file (ex. <u>test.ctxt</u>) with a text editor, and delete the entire first line
+ of text.  If your editor wraps lines, delete all characters from the beginning up to and including the third
+  semi-colon (76 bytes).
+<br><br>
+Example - Before:<br>
+<code><span style="color: green; font-size: 14px;">
+   DeadboltEdit Encrypted ~~ Do Not Modify :0:21cbe801827670c4a3d8e2787d745ba0:<br>
+   U2FsdGVkX1+vKYGFaEZpjrXvyDpZ42Lrh10YiXLW6875ILq1iWpuzBh3t8hPEUghpw3C5ZaPhIOv<br>
+   odenseUf0R2doufTba7ClqVVMWKDEadbNsoFrjuSZTQ5OgPqYZeo+atlBpHyhy6Rh0ScNUFGk/YU<br>
+   </span>
+</code>
+<br>
+Example - After:<br>
+<code><span style="color: green; font-size: 14px;">
+   U2FsdGVkX1+vKYGFaEZpjrXvyDpZ42Lrh10YiXLW6875ILq1iWpuzBh3t8hPEUghpw3C5ZaPhIOv<br>
+   odenseUf0R2doufTba7ClqVVMWKDEadbNsoFrjuSZTQ5OgPqYZeo+atlBpHyhy6Rh0ScNUFGk/YU<br>
+   </span>
+</code>
+<br>
+</li>
+
+<li>Save the file with name <u>encrypted.txt</u>.
+<br><br></li>
+
+<li>Decrypt with OpenSSL, using the following command:
+<br><br>
+<code><span style="font-size: 14px;">
+   openssl enc -blowfish -d -a -salt -in encrypted.txt -out plaintext.txt
+   </span></code>
+   <br><br>
+   The openssl program will prompt you for the encryption password.  Enter the password that was used to create
+   the original file with DeadboltEdit.<br><br>
+</li>
+
+<li>The previous step should have created a plain-text file named <u>plaintext.txt</u>, which will contain your
+ original plain-text information, plus a 1-line block-header with a DeadboltEdit check-code.
+<br><br>
+Edit file <u>plaintext.txt</u> with a text editor, delete the first line, and save the file.
+<br><br>
+Example - Before:<br>
+<code><span style="color: green; font-size: 14px;">
+   3f1777708620ef1e534468c421c23ff1<br>
+   Test file to demonstrate OppenSSL compatibility.<br>
+   Line 2.<br>
+   Line 3.<br>
+   End.<br>
+   </span>
+</code>
+<br><br>
+Example - After:<br>
+<code><span style="color: green; font-size: 14px;">
+   Test file to demonstrate OppenSSL compatibility.<br>
+   Line 2.<br>
+   Line 3.<br>
+   End.<br>
+   </span>
+</code>
+<br>
+File <u>plaintext.txt</u> should now be a correctly decrypted file.<br><br>
+</li>
+</OL>
+
+<a href="#top">Top</a>
+</li>
+
+
+<li><a name="script"></a><h4>Simplified Decryption With A UNIX Script</h4>
+<p>For users comfortable with the UNIX command-line and UNIX scripting, the following simple Bourne Shell script
+ will decrypt a DeadboltEdit file with OpenSSL, sending the plain-text to stdout.  
+</p>
+Requirements:<br>
+<OL type="a">
+   <li>OpenSSL command-line tools.</li>
+   <li>UNIX-compatible shell environment (eg. Mac OS X, Linux, MinGW on Windows).</li>
+   <li>A DeadboltEdit test file.  <b>Do NOT use an important file - make a test file that can be discarded if you
+    make a mistake.</b></li>
+</OL>
+<p>Script:<br>
+<code><span style="color: green; font-size: 14px;">
+   #!/bin/sh<br>
+   #<br>
+   INFILE=$1<br>
+   export INFILE<br>
+<br>
+   # decrypt file using openssl / Blowfish<br>
+   tail -n +1 ${INFILE} | openssl enc -blowfish -d -a -salt | tail -n +2
+   </span>
+</code>
+<br>
+</p>
+<p>Usage:<br>
+Copy the script to a file (ex. decrypt.sh), and make it executable (ex. chmod 755 decrypt.sh).<br>
+<br>
+Run the script from a shell, and supply the path of the DeadboltEdit file as an argument.<br>
+<br>
+Example :<br>
+<code><span style="color: green; font-size: 14px;">
+   decrypt.sh test.ctxt<br>
+   </span>
+</code>
+<br>
+The openssl program will prompt you for the encryption password.  Enter the password that was used to create the original file with DeadboltEdit.<br>
+<br>
+The decrypted plain-text is sent to stdout, which can optionally be redirected to a file.
+<br><br>
+</p>
+<a href="#top">Top</a>
+</li>
+</OL>
+
+<br>
+<br>
+
+<HR>
+<p style="text-align: center;">
+Copyright 2012 - 2018 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Michael Wright &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  All Rights Reserved
+</p>
+<HR>
+</body>
+</html>

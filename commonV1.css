@@ -1,0 +1,166 @@
+/* CSS File for MWSoftware.org */
+/*
+ * To maintain margin, set height & width of body to values of main_container + 40
+ * This gives a margin of 20 on all sides, a much nice look.
+ */
+html, body {
+    height: 900px;
+    min-width: 890px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 12px;
+    font-family:  Verdana, sans-serif;
+    background-color: rgb(0, 85, 150);
+    color: rgb(0, 0, 0);
+}
+#main_container {
+    height: 860px;
+    width: 850px;
+    top: 20px;
+    overflow: hidden;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-color: white;
+}
+/* Note: title_strip, navbar and footer are positioned relative to main_container */
+#title_strip {
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    width: 99%;
+    height: 112px;
+    z-index: 0;
+    overflow: hidden;
+    text-align: center;
+    color: rgb(0, 85, 150);
+}
+#navbar_container {
+    position: absolute;
+    top: 120px;
+    left: 2px;
+    right: 2px;
+    width: 99%;
+    height: 55px;
+    z-index: 0;
+    overflow: hidden;
+    text-align: left;
+}
+#footer {
+    position: absolute;
+    bottom: 4px;
+    left: 2px;
+    width: 99%;
+    height: 50px;
+    overflow: hidden;
+    text-align: center;
+    color: #000000;
+    background-color: white;
+}
+
+
+a:link {color:blue;}
+a:visited {color:blue;}
+a:hover {color:red;}
+a:active {color:red;}
+/* End of main document definitions */
+
+/*
+ *Navbar Definitions
+ */
+#navbar {
+width: 90%;
+height:30px;
+background-color: white;
+}
+
+#navbar ul {
+width:90%;
+}
+
+#navbar ul li {
+float:left;
+color: blue;
+font-size: 12px;
+font-weight: bold;
+background-color: tranparent;
+padding:0 5px 0 5px;
+border-right:2px solid white;
+border-left:2px solid white;
+height:25px;
+list-style:none;
+display:block;
+line-height:25px;
+text-align:center;
+cursor:pointer;
+margin: 5px 5px;
+border-radius: 4px 4px 4px 4px;
+box-shadow: 0px 0px 1px rgb(85, 85, 85)
+}
+
+#navbar ul li:hover {
+background-color:#CCC;
+}
+
+#navbar ul li a:link {
+color: blue;
+text-decoration: none;
+}
+#navbar ul li a:visited {
+color: blue;
+}
+#navbar ul li a:hover {
+color: red;
+}
+#navbar ul li a:active {
+color: blue;
+}
+/* End of navbar definitions */
+
+/*
+ * Page column divided by grey section headings
+ */
+/* color: #FFF; (white) */
+/* color: rgb(0, 0, 0); (black) */
+/* color: rgb(0, 85, 150); (Dark Blue - match header)*/
+/* background: #B6B8BB; (darker grey) */
+.SectionedColumn h3 {
+    background: rgb(230, 230, 230);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 10px 0 0 0;
+    padding: 5px 10px;
+}
+
+/* Begin: Defs for nav links within the SectionedColumn */
+.SectionedColumn ul {
+margin-left:0px;
+padding-left:10px;
+}
+.SectionedColumn ul li {
+color: blue;
+font-size: 14px;
+font-weight: bold;
+background-color: tranparent;
+height:25px;
+list-style:none;
+text-align:left;
+cursor:pointer;
+}
+.SectionedColumn ul li a:link {
+color: blue;
+text-decoration: none;
+}
+.SectionedColumn ul li a:visited {
+color: blue;
+}
+.SectionedColumn ul li a:hover {
+color: red;
+}
+.SectionedColumn ul li a:active {
+color: blue;
+}
+/* End: Defs for nav links within the SectionedColumn */
