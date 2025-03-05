@@ -29,7 +29,7 @@ h1 {
 <li><a href="#autosave">Does the Mac OS X version of DeadboltEdit support Autosave?</a></li>
 <li><a href="#filenames">How are DeadboltEdit files named?</a></li>
 <li><a href="#formatted_text">Can I use graphics or special characters in my DeadboltEdit notes?</a></li>
-<li><a href="#openssl">How is the encryption compatible with OpenSSL?</a></li>
+<li><a href="#openssl">Is the encryption compatible with OpenSSL?</a></li>
 <li><a href="#external_storage">Can DeadboltEdit be used with USB flash drives or cloud storage?</a></li>
 </OL>
 
@@ -38,7 +38,7 @@ h1 {
 
 <li><a name="blowfish"></a><h4>What is Blowfish encryption?</h4>
 Blowfish is a strong encryption method that is widely accepted and used in commercial encryption products.
- The Blowfish encryption in DeadboltEdit is compatible with the OpenSSL implemention.  A good explanation of the Blowfish cipher can be found here: <a href="http://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Wikipedia: Blowfish Cipher</a>.
+ A good explanation of the Blowfish cipher can be found here: <a href="http://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Wikipedia: Blowfish Cipher</a>.
 <br>
 <br>
 <a href="#top">Top</a>
@@ -79,18 +79,12 @@ The editor is for plain-text only, like Windows Notepad &trade;. Special charact
 <a href="#top">Top</a>
 </li>
 
-<li><a name="openssl"></a><h4>How is the encryption compatible with OpenSSL?</h4>
-When DeadboltEdit encrypts text, the actual encryption and encoding are compatible with OpenSSL encryption.
- This is an important consideration because the encryption implementation is verifiable against a respected
-  implementation.<br><br>
-The file format used by DeadboltEdit differs from the OpenSSL format because DeadboltEdit has additional
- information embedded in a file header to allow checking for file corruption. For this reason, you can't
-  use DeadboltEdit files with OpenSSL.<br><br>
-It is possible to remove file header information from a DeadboltEdit encrypted file, and then decrypt it
- with OpenSSL command-line tools using the same password that was used to encrypt it.  There will be an
- article on the website Support page that will explain how to do this.  This is not something you would
- want to do in actual practice, but it is a valuable excercise to demonstrate the correctness of the
- encryption implementation.
+<li><a name="openssl"></a><h4>Is the encryption compatible with OpenSSL?</h4>
+The encryption is not compatible with OpenSSL command-line tools.  The actual encryption is compatible with 
+OpenSSL versions prior to OpenSSL 3, but not version 3 and later.<br><br>
+Also, the file format used by DeadboltEdit differs from the OpenSSL format because additional information is added 
+in an &quot;integrity header&quot; to allow checking for file corruption. For this reason, you can't
+  use DeadboltEdit files with OpenSSL command-line tools.
 <br>
 <br>
 <a href="#top">Top</a>
@@ -116,7 +110,7 @@ Yes, DeadboltEdit can save and open files on external drives, such as flash driv
 
 <HR>
 <p style="text-align: center;">
-Copyright 2012 - 2018 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Michael Wright &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  All Rights Reserved
+Copyright 2012 - 2025 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Michael Wright &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  All Rights Reserved
 </p>
 <HR>
 </body>

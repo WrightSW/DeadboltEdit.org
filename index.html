@@ -130,8 +130,10 @@ html, body {
 <li style="padding: 2px;">Encrypted note files can be sent as e-mail attachments. (UTF-8 character encoded, MIME-compliant formatting)</li>
 <li style="padding: 2px;">Secure handling of encryption passwords.  Passwords and encryption keys are never stored anywhere. Passwords are internally encrypted while held in memory, except for the brief time they are used to generate encryption/decryption keys.</li>
 <li style="padding: 2px;">File Checking: Two levels of file integrity checking each time a file is opened to guard against file corruption and file tampering. (A very useful feature when files have been sent as e-mail attachments)</li>
-<li style="padding: 2px;">Encryption and decryption are done within program memory, using an OpenSSL-compatible library. No temporary files, and no use of external encryption programs. (much more secure)</li>
-<li style="padding: 2px;">Blowfish encryption is compatible with the OpenSSL implementation.  (not file compatible with OpenSSL) For more information, please see technical article "<a href="OpenSSL_Compatibility.html" target="_blank">OpenSSL Compatibility</a>", which is also on the <a href="support.html">Support</a> page.</li>
+<li style="padding: 2px;">Blowfish encryption and decryption are done within program memory, using an OpenSSL encryption library. 
+    No temporary files, and no use of external encryption programs. (much more secure) <br>A good explanation of
+    the Blowfish cipher can be found
+    here: <a href="http://en.wikipedia.org/wiki/Blowfish_%28cipher%29">Wikipedia: Blowfish Cipher</a>.</li>
 </UL>
 
 <p><b>I Hope You Enjoy Using DeadboltEdit ...</b><br>
